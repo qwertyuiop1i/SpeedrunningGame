@@ -44,6 +44,11 @@ public class fireBox : MonoBehaviour
         fireStrength -= damage;
 
         fireStrength = Mathf.Clamp(fireStrength, 0f, fireMaxStrength);
+
+        if (fireStrength == 0)
+        {
+            gameObject.tag = "putOut";
+        }
     }
 
 }
