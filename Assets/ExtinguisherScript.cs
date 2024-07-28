@@ -6,46 +6,38 @@ public class ExtinguisherScript : MonoBehaviour
 {
     // Start is called before the first frame update
     public float maxDistance = 3f;
-    public float smoothTime = 0.1f; 
+    public float smoothTime = 0.1f;
 
-    private Vector2 initialPosition;
     private Vector2 targetPosition;
-    private bool isHeldDown = false;
+    private Transform parent;
+
     void Start()
     {
-        initialPosition = new Vector2(0, 0);
+        parent = transform.parent;
     }
-
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
-            isHeldDown = true;
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            isHeldDown = false;
-        }
-
-        if (isHeldDown)
-        {
-  
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-         
 
-            mousePosition = Vector2.ClampMagnitude(mousePosition, maxDistance);
-            targetPosition = mousePosition;
-            transform.position = targetPosition;
+       
+            Vector2 direction = mousePosition - (Vector2)parent.position;
+
+          
+            direction = Vector2.ClampMagnitude(direction, maxDistance);
+
+            targetPosition = (Vector2)parent.position + direction;
+
+            transform.position = Vector2.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
         }
         else
         {
             transform.localPosition = new Vector2(0, 0);
         }
-
-        //transform.localPosition = Vector3.SmoothDamp(transform.localPosition, targetPosition, ref velocity, smoothTime);
-
-
     }
-    //private Vector3 velocity = Vector3.zero;
+
+    private Vector2 velocity = Vector2.zero;
+
 }
