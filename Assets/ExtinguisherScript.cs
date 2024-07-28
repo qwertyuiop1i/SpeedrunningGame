@@ -11,6 +11,7 @@ public class ExtinguisherScript : MonoBehaviour
     private Vector2 targetPosition;
     private Transform parent;
 
+    public float waterStrength = 1f;
     void Start()
     {
         parent = transform.parent;
@@ -31,6 +32,10 @@ public class ExtinguisherScript : MonoBehaviour
             targetPosition = (Vector2)parent.position + direction;
 
             transform.position = Vector2.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+
+
+
+
         }
         else
         {
