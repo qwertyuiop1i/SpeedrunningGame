@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
 public class gameManager : MonoBehaviour
 {
     
@@ -14,6 +15,8 @@ public class gameManager : MonoBehaviour
 
     public GameObject heatBarGO;
     public float heatBarFullWidth=30f;
+
+    public GameObject t;
     void Start()
     {
         currentTime = 0f;
@@ -23,15 +26,21 @@ public class gameManager : MonoBehaviour
     void Update()
     {
         currentTime += Time.deltaTime;
+        t.GetComponent<TMPro.TextMeshProUGUI>().text = (currentTime).ToString();
 
         if (GameObject.FindGameObjectsWithTag("burnable").Length == 0)
         {
             hasWon = true;
             Debug.Log("Won");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         else
         {
             heatBar += Time.deltaTime * GameObject.FindGameObjectsWithTag("burnable").Length;
+            if (heatBar >= 100f)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
         }
         //if no burning objects then win screen and go to next.
 

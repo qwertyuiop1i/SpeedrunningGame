@@ -12,10 +12,12 @@ public class waterParticle : MonoBehaviour
     // Start is called before the first frame update
 
     public GameObject ps;
+
+    public Rigidbody2D rb;
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-   
+        rb = GetComponent<Rigidbody2D>();
 
        // sr.color = Color.Lerp(startColor, endColor, Random.Range(0f, 1f));
     }
@@ -23,18 +25,24 @@ public class waterParticle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (rb.velocity.magnitude < 0.6f)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("burnable"))
+        if (!collision.gameObject.CompareTag("water"))
         {
-            collision.gameObject.GetComponent<fireBox>().putOut(strength);
-            
+            if (collision.gameObject.CompareTag("burnable"))
+            {
+                collision.gameObject.GetComponent<fireBox>().putOut(strength);
+
+            }
+            ps.GetComponent<ParticleSystem>().Play();
+            ps.transform.parent = null;
+            Destroy(gameObject);
         }
-        ps.GetComponent<ParticleSystem>().Play();
-        ps.transform.parent = null;
-        Destroy(gameObject);
     }
 }
