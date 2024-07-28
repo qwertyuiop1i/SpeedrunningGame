@@ -136,3 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 174d1a7f2f194cf47ad197e722af8576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  water: {fileID: 3064449220593949677, guid: beb7bebc80a92394a99233bb46245eaa, type: 3}
+  waterAmount: 100
+  force: 20
+  time: 0
+  explodeTime: 3

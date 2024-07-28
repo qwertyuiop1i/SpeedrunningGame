@@ -150,7 +150,7 @@ MonoBehaviour:
   sr: {fileID: 0}
   startColor: {r: 0.43506587, g: 0.72455066, b: 0.9528302, a: 0}
   endColor: {r: 0.38319686, g: 0.48261446, b: 0.6509434, a: 0}
-  strength: 3
+  strength: 7
   ps: {fileID: 8069670919852074653}
   rb: {fileID: 0}
 --- !u!1 &8069670919852074653

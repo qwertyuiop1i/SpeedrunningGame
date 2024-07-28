@@ -16,7 +16,7 @@ public class particleSelfDestryo : MonoBehaviour
     {
         if (!ps.isPlaying)
         {
-            Destroy(gameObject);
+            Destroy(gameObject,0.5f);
         }
     }
 }

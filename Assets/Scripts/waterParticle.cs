@@ -19,7 +19,7 @@ public class waterParticle : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
 
-       // sr.color = Color.Lerp(startColor, endColor, Random.Range(0f, 1f));
+        sr.color = Color.Lerp(startColor, endColor, Random.Range(0f, 1f));
     }
 
     // Update is called once per frame

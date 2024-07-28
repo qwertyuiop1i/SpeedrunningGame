@@ -35,7 +35,7 @@ public class movement : MonoBehaviour
         {
             time = 0f;
             GameObject grenade = Instantiate(fireGrenade, transform.position, Quaternion.identity);
-            //grenade.GetComponent<Rigidbody2D>().AddForce(transform.up * 5f);
+            grenade.GetComponent<Rigidbody2D>().AddForce(transform.up * 5f);
         }
     }
 
