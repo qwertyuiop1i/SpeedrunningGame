@@ -20,6 +20,7 @@ public class gameManager : MonoBehaviour
     void Start()
     {
         currentTime = 0f;
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - burnable
   - putOut
+  - water
   layers:
   - Default
   - TransparentFX
