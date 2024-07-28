@@ -26,7 +26,7 @@ public class gameManager : MonoBehaviour
     void Start()
     {
         currentTime = 0f;
-        DontDestroyOnLoad(gameObject);
+
 
         soundPlayer = GetComponent<AudioSource>();
     }
@@ -34,6 +34,9 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        heatBarGO = GameObject.Find("heatFilling");
+        t = GameObject.Find("timerText");
+
         currentTime += Time.deltaTime;
         timeTrack += Time.deltaTime;
         t.GetComponent<TMPro.TextMeshProUGUI>().text = (currentTime).ToString();
@@ -49,7 +52,9 @@ public class gameManager : MonoBehaviour
             heatBar += Time.deltaTime * GameObject.FindGameObjectsWithTag("burnable").Length;
             if (heatBar >= 100f)
             {
+
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                heatBar = 0f;
             }
         }
         //if no burning objects then win screen and go to next.
