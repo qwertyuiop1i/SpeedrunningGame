@@ -6,10 +6,13 @@ public class fireBox : MonoBehaviour
 {
     public float fireMaxStrength;
     public float fireStrength;
+    public float buildupSpeed;
 
     public ParticleSystem smokePs;
     public ParticleSystem firePs;
 
+    public float time = 0f;
+    public float buildTime = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +27,17 @@ public class fireBox : MonoBehaviour
 
         smokeStuff.rateOverTime = fireStrength / fireMaxStrength * 30;
         fireStuff.rateOverTime = fireStrength / fireMaxStrength * 60;
+        time += Time.deltaTime;
+        if (time > buildTime)
+        {
+            if (fireStrength != 0)
+            {
+                fireStrength += buildupSpeed;
+                fireStrength = Mathf.Clamp(fireStrength, 0f, fireMaxStrength);
+                time = 0f;
+
+            }
+        }
     }
     public void putOut (float damage){
 
