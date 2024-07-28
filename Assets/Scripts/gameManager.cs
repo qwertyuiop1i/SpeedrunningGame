@@ -23,6 +23,8 @@ public class gameManager : MonoBehaviour
     public AudioClip warningBeep;
     public float beepTime = 1f;
     public float timeTrack = 0f;
+
+    public float[] times = new float[5];
     void Start()
     {
         currentTime = 0f;

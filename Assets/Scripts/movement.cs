@@ -10,8 +10,13 @@ public class movement : MonoBehaviour
     private Vector2 move;
     private Vector2 mousePos;
 
+    public GameObject fireGrenade;
+
+    public float time;
+    public float reloadTime=5f;
     void Start()
     {
+        time = reloadTime;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -23,6 +28,15 @@ public class movement : MonoBehaviour
 
         // Get mouse position in world coordinates
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        time += Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Space)&&time>reloadTime)
+        {
+            time = 0f;
+            GameObject grenade = Instantiate(fireGrenade, transform.position, Quaternion.identity);
+            //grenade.GetComponent<Rigidbody2D>().AddForce(transform.up * 5f);
+        }
     }
 
     void FixedUpdate()

@@ -44,5 +44,7 @@ public class waterParticle : MonoBehaviour
             ps.transform.parent = null;
             Destroy(gameObject);
         }
+        Physics2D.IgnoreCollision(collision.collider, GetComponent<BoxCollider2D>());
     }
+    
 }
