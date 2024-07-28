@@ -10,9 +10,12 @@ public class waterParticle : MonoBehaviour
     public Color endColor;
     public float strength = 3f;
     // Start is called before the first frame update
+
+    public GameObject ps;
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
+   
 
        // sr.color = Color.Lerp(startColor, endColor, Random.Range(0f, 1f));
     }
@@ -30,6 +33,8 @@ public class waterParticle : MonoBehaviour
             collision.gameObject.GetComponent<fireBox>().putOut(strength);
             
         }
+        ps.GetComponent<ParticleSystem>().Play();
+        ps.transform.parent = null;
         Destroy(gameObject);
     }
 }

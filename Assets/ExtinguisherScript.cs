@@ -44,7 +44,7 @@ public class ExtinguisherScript : MonoBehaviour
             if (time > reloadTime) 
             {
                 GameObject water = Instantiate(waterParticle,transform.position,Quaternion.identity);
-                water.GetComponent<Rigidbody2D>().AddForce(transform.right * waterPower,ForceMode2D.Impulse);
+                water.GetComponent<Rigidbody2D>().AddForce(transform.up * waterPower,ForceMode2D.Impulse);
                 time = 0f;
             }
 
