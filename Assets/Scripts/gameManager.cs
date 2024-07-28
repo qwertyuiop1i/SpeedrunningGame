@@ -17,16 +17,25 @@ public class gameManager : MonoBehaviour
     public float heatBarFullWidth=30f;
 
     public GameObject t;
+
+    public AudioSource soundPlayer;
+
+    public AudioClip warningBeep;
+    public float beepTime = 1f;
+    public float timeTrack = 0f;
     void Start()
     {
         currentTime = 0f;
         DontDestroyOnLoad(gameObject);
+
+        soundPlayer = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
         currentTime += Time.deltaTime;
+        timeTrack += Time.deltaTime;
         t.GetComponent<TMPro.TextMeshProUGUI>().text = (currentTime).ToString();
 
         if (GameObject.FindGameObjectsWithTag("burnable").Length == 0)
@@ -44,7 +53,16 @@ public class gameManager : MonoBehaviour
             }
         }
         //if no burning objects then win screen and go to next.
+        if (heatBar >= 80f)
+        {
+            
+            if (!soundPlayer.isPlaying&&timeTrack>beepTime)
+            {
+                soundPlayer.PlayOneShot(warningBeep);
+                timeTrack = 0f;
+            }
 
+        }
         heatBarGO.transform.localScale =new Vector3( heatBarFullWidth * heatBar / 100f,0.8f,1);
     }
 }

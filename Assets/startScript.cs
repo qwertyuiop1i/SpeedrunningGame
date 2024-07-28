@@ -16,4 +16,8 @@ public class startScript : MonoBehaviour
     {
         
     }
+    public void startGame()
+    {
+        SceneManager.LoadScene(1);
+    }
 }
