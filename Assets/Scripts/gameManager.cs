@@ -36,39 +36,48 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        heatBarGO = GameObject.Find("heatFilling");
-        t = GameObject.Find("timerText");
-
-        currentTime += Time.deltaTime;
-        timeTrack += Time.deltaTime;
-        t.GetComponent<TMPro.TextMeshProUGUI>().text = (currentTime).ToString();
-
-        if (GameObject.FindGameObjectsWithTag("burnable").Length == 0)
+        if (SceneManager.GetActiveScene().buildIndex != 0)
         {
-            hasWon = true;
-            Debug.Log("Won");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            heatBarGO = GameObject.Find("heatFilling");
+            t = GameObject.Find("timerText");
+
+            currentTime += Time.deltaTime;
+            timeTrack += Time.deltaTime;
+            t.GetComponent<TMPro.TextMeshProUGUI>().text = (currentTime).ToString();
+
+            if (GameObject.FindGameObjectsWithTag("burnable").Length == 0)
+            {
+                hasWon = true;
+                Debug.Log("Won");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                heatBar = 0f;
+            }
+            else
+            {
+                heatBar += 0.2f*Time.deltaTime * GameObject.FindGameObjectsWithTag("burnable").Length;
+                if (heatBar >= 100f)
+                {
+
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                    heatBar = 0f;
+                }
+            }
+           
+            if (heatBar >= 80f)
+            {
+
+                if (!soundPlayer.isPlaying && timeTrack > beepTime)
+                {
+                    soundPlayer.PlayOneShot(warningBeep);
+                    timeTrack = 0f;
+                }
+            }
+            heatBarGO.transform.localScale = new Vector3(heatBarFullWidth * heatBar / 100f, 0.8f, 1);
         }
         else
         {
-            heatBar += Time.deltaTime * GameObject.FindGameObjectsWithTag("burnable").Length;
-            if (heatBar >= 100f)
-            {
-
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                heatBar = 0f;
-            }
+            GameObject.Find("HStext").GetComponent<TMPro.TextMeshProUGUI>().text = "High Score: " + bestTime.ToString();
         }
-        //if no burning objects then win screen and go to next.
-        if (heatBar >= 80f)
-        {
-            
-            if (!soundPlayer.isPlaying&&timeTrack>beepTime)
-            {
-                soundPlayer.PlayOneShot(warningBeep);
-                timeTrack = 0f;
-            }
-        }
-        heatBarGO.transform.localScale =new Vector3( heatBarFullWidth * heatBar / 100f,0.8f,1);
     }
+    
 }

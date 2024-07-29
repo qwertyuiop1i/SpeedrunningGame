@@ -137,3 +137,7 @@ MonoBehaviour:
   heatBarGO: {fileID: 0}
   heatBarFullWidth: 30
   t: {fileID: 0}
+  soundPlayer: {fileID: 0}
+  warningBeep: {fileID: 8300000, guid: e0d4e03743d563445ba8792401d447b3, type: 3}
+  beepTime: 1
+  timeTrack: 0
