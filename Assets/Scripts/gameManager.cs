@@ -24,7 +24,9 @@ public class gameManager : MonoBehaviour
     public float beepTime = 1f;
     public float timeTrack = 0f;
 
-    public float ?bestTime=null;
+    public float ?bestTime=999999f;
+
+    public int levelCount = 3;
     void Start()
     {
         currentTime = 0f;
@@ -49,7 +51,14 @@ public class gameManager : MonoBehaviour
             {
                 hasWon = true;
                 Debug.Log("Won");
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                if (SceneManager.GetActiveScene().buildIndex == levelCount)
+                {
+                    SceneManager.LoadScene(0);
+                }
+                else
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                }
                 heatBar = 0f;
             }
             else
@@ -60,6 +69,11 @@ public class gameManager : MonoBehaviour
 
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                     heatBar = 0f;
+                    if (currentTime < bestTime)
+                    {
+                        bestTime = currentTime;
+                        currentTime = 99999f;
+                    }
                 }
             }
            
