@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class movement : MonoBehaviour
 {
     public float moveSpeed = 5f;
@@ -18,6 +18,7 @@ public class movement : MonoBehaviour
     {
         time = reloadTime;
         rb = GetComponent<Rigidbody2D>();
+        
     }
 
     void Update()

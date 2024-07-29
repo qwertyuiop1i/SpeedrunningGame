@@ -29,6 +29,7 @@ public class gameManager : MonoBehaviour
     public int levelCount = 3;
     void Start()
     {
+        levelCount = 7;
         currentTime = 0f;
 
 
@@ -54,9 +55,15 @@ public class gameManager : MonoBehaviour
                 if (SceneManager.GetActiveScene().buildIndex == levelCount)
                 {
                     SceneManager.LoadScene(0);
+                    if (currentTime < bestTime)
+                    {
+                        bestTime = currentTime;
+                        currentTime = 99999f;
+                    }
                 }
                 else
                 {
+
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                 }
                 heatBar = 0f;
@@ -69,11 +76,7 @@ public class gameManager : MonoBehaviour
 
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                     heatBar = 0f;
-                    if (currentTime < bestTime)
-                    {
-                        bestTime = currentTime;
-                        currentTime = 99999f;
-                    }
+                   
                 }
             }
            
@@ -91,6 +94,7 @@ public class gameManager : MonoBehaviour
         else
         {
             GameObject.Find("HStext").GetComponent<TMPro.TextMeshProUGUI>().text = "High Score: " + bestTime.ToString();
+            currentTime = 0f;
         }
     }
     

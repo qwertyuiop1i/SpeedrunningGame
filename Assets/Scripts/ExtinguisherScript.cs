@@ -19,9 +19,13 @@ public class ExtinguisherScript : MonoBehaviour
     public float reloadTime = 0.2f;
 
     public float waterPower = 5f;
+
+    public AudioSource ab;
+    public AudioClip ac;
     void Start()
     {
         parent = transform.parent;
+        ab = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -46,6 +50,10 @@ public class ExtinguisherScript : MonoBehaviour
                 GameObject water = Instantiate(waterParticle,transform.position,Quaternion.identity);
                 water.GetComponent<Rigidbody2D>().AddForce(transform.up * waterPower,ForceMode2D.Impulse);
                 time = 0f;
+                if (!ab.isPlaying)
+                {
+                    ab.PlayOneShot(ac);
+                }
             }
 
         }
