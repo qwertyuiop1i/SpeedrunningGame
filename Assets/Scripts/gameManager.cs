@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class gameManager : MonoBehaviour
 {
     
-    List<float> myFloatList = new List<float>();
+
     public float currentTime;
     public bool hasWon;
 
@@ -24,7 +24,7 @@ public class gameManager : MonoBehaviour
     public float beepTime = 1f;
     public float timeTrack = 0f;
 
-    public float[] times = new float[5];
+    public float ?bestTime=null;
     void Start()
     {
         currentTime = 0f;
@@ -68,7 +68,6 @@ public class gameManager : MonoBehaviour
                 soundPlayer.PlayOneShot(warningBeep);
                 timeTrack = 0f;
             }
-
         }
         heatBarGO.transform.localScale =new Vector3( heatBarFullWidth * heatBar / 100f,0.8f,1);
     }
